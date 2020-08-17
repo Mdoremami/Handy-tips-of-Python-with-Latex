@@ -1,0 +1,1787 @@
+%Docunment
+\documentclass[a4paper,18pt]{article}
+%..............................................................................................................
+%Packages
+\usepackage{anyfontsize}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage[a4paper,left=1in,right=1in,top=1in,bottom=1in]{geometry}
+\usepackage[none]{hyphenat}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{amsmath,array,environ}
+
+%..............................................................................................................
+%Settings
+\definecolor{matgreen}{rgb}{0.15,0.6,0.0}
+\definecolor{browny}{rgb}{0.8,0.3,0.0}
+\definecolor{important}{rgb}{0.9,0.1,0.1}
+\definecolor{Red}{rgb}{0.9,0,0.1}
+\definecolor{Abi}{rgb}{0.15,0,0.5}
+\hypersetup{
+colorlinks=true,
+linktoc=all,
+linkcolor=Abi
+}
+
+
+
+
+
+
+%..............................................................................................................
+
+
+\begin{document}
+\title{\textsl{\textbf{\fontsize{40}{50}\selectfont Python Handy Tips\\}}}
+\author{\\\\\\ \textrm{\textbf{\Large Mahdi Dor Emami}}\\\\\\}
+\date{\today}
+\maketitle
+
+
+\newpage
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+
+%..............................................................................................................
+% Introduction
+\section{\colorbox {Abi}{\color{white}{{\textbf {\Large Introduction}}}}}
+This literature is not a "0 to 100" python learning cookbook or textbook or anything! This is made of only the most useful commands being able to work with python, Written by Mahdi Dor Emami. I hope it contains useful information for you ladies and gentlemen.\\
+
+\textbf{Also}, there are some python files that contain some good examples on specified topic (by the name of the file) with deep explanations inside the files.\\\\
+
+%..............................................................................................................
+
+\newpage
+
+%..............................................................................................................
+% General Commands
+\section{\colorbox {Abi}{\color{white}{{\textbf {\Large Python General Commands}}}}}
+\subsection{\colorbox {matgreen}{\color{white}{\large print command tips}}}
+\textbf{print() $\Rightarrow$} Simply prints... but let's review some tips through examples.\\\\
+\textbf{Example:\\}
+
+$>>>$print("tell \%s(or \%d or \%f) people" \%5)\\
+
+\hspace{14pt} 'tell 5 people'\\
+
+$>>>$print("tell \{\} people" .format(5))\\
+
+\hspace{14pt} 'tell 5 people'\\
+
+$>>>$print("tell \%s(or \%d or \%f) + \{\} people" .format(6)\%5\\
+
+\hspace{14pt} 'tell 5 + 6 people'\\
+
+$>>>$print("tell \{\} + \%s(or \%d or \%f) people" .format(6)\%5\\
+
+\hspace{14pt} 'tell 6 + 5 people'\\
+
+Better than all of the above, and most robus technique :\\
+
+$>>>$print(f"tell \{variable1\} + \{variable2\} (or \{variable3\}or \{variable4\}) people"\\
+
+In this way, you can easily add variable name inside the \{\} without needing to write further things like \% or .format\{\}.
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Measuring Time}}}
+
+You have to use library \textbf{timeit} to measure time, not \textbf{time} library. Because it's way more accurate. Do as below:\\\\
+\textbf{Example:\\}
+
+$>>>$import timeit\\{\textcolor{brown}{\# Imports the library}}\\
+
+$>>>$timeit.timeit('2*3')\\{\textcolor{brown}{\# Returns the duration of the statement 2*3 to be done.}}\\
+
+timeit.timeit(stmt, setup,timer, number) : \\
+\textbf{stmt:\\} This will take the code for which you want to measure the execution time. The default value is "pass".\\
+\textbf{setup:\\}: This will have setup details that need to be executed before stmt. The default value is "pass."\\
+\textbf{timer:\\}: This will have the timer value, timeit() already has a default value set, and we can ignore it.\\
+\textbf{number:\\}: The stmt will execute as per the number is given here. The default value is 1000000.\\\\
+
+
+$>>>$timeit.timeit('char in text', setup='text = "sample string"; char = "g"')\\{\textcolor{brown}{\# Calculates the time that is necessary for the statement "char in text" that says if char is in text or not. But what is char and text? They are pre-settings that need to be passed in setup.}}\\
+
+$>>>$timeit.repeat(stmt,setup,timer,number,repeat)\\{\textcolor{brown}{\# This function, repeats measuring the time for "repeat" number. Consider below example:}}\\
+
+$>>>$timeit.repeat('char in text', setup='text = "sample string"; char = "g"',number=1000000,repeat=10)\\{\textcolor{brown}{\# This function, measures the time for the operation "char in text" to be done for one million times (if 'char in text' is measured one time, it's a very small number representing its duration). repeat, does it for 10 times. It will give you a list with 10 time measurements that measured the time for 'char in text' command running one million times.}}\\
+
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large .join functionality}}}
+Just pay attention to the examples! Run them in your Python IDE and see the results.\\\\
+\textbf{Example:\\}
+
+$>>>$"".join(['Fuck You \%d times '\% i for i in range(1000)])\\{\textcolor{brown}{\# Prints Fuck You 1 until Fuck You 999}}\\
+
+$>>>$"".join(['Fuck You' + ' ' +  str(i)+' '  for i in range(1000) ])\\{\textcolor{brown}{\# Same as before. Pay attention that there's a space in between the quotes after + sign.}}\\
+
+$>>>$'-'.join(str(m) for m in range(100))\\{\textcolor{brown}{\# The result is as below:}}\\
+
+\hspace{14pt}'0-1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19-20-21-22-23-24-25-\\
+26-27-28-29-30-31-32-33-34-35-36-37-38-39-40-41-42-43-44-45-46-47-48-49-50-\\
+51-52-53-54-55-56-57-58-59-60-61-62-63-64-65-66-67-68-69-70-71-72-73-74-75-\\
+76-77-78-79-80-81-82-83-84-85-86-87-88-89-90-91-92-93-94-95-96-97-98-99'\\\\
+
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Lambda Function}}}
+It's a super cool feature, it acts like a function. Just do the examples below to find out.
+\textbf{Example:\\}
+
+$>>>$x = lambda a : 3*a\\
+
+$>>>$print( x(10) )\\
+
+\hspace*{14pt} 30
+
+
+$>>>$def myfunc(n):\\
+
+$>>>$\hspace*{14pt}return lambda a : a * n\\
+
+$>>>$mydoubler = myfunc(2)\\
+
+$>>>$print(mydoubler(11))\\
+
+\hspace*{14pt} 22
+
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Creating a new variable in each iteration of a for loop}}}
+Sooo cooooooooooooooL :
+\textbf{Example:\\}
+
+$>>>$for x in range(0, 9):\\
+
+$>>>$\hspace*{14pt}globals()['var\%s' \% x] = 'Hello'\\
+
+
+Aother example : \\
+
+$>>>$for x in range(0, 9):\\
+
+$>>>$\hspace*{14pt}globals()['var\%s' \% x] = 'Hello\%s'\%i\\
+
+Imagine what you can do with this capability and the pickle library :\\
+
+$>>>$for i in range(5):\\
+
+$>>>$\hspace*{14pt}dat = i\\
+
+$>>>$\hspace*{14pt}tmp = 'data\_\%s'\%i\\
+
+$>>>$\hspace*{14pt}with open(tmp,'wb') as f:\\
+
+$>>>$\hspace*{28pt}pickle.dump(dat,f)\\
+
+$>>>$\hspace*{14pt}f.close()\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Iterator}}}
+\textbf{x=iter(mylist) $\Rightarrow$} make an iteration on mylist. You can use the following commands to be able to see the content of mylist:\\\\
+\textbf{Example:\\}
+$>>>$x = iter(mlist)\\
+
+$>>>$next(x)\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Python Generator}}}
+You must define it inside a function... The main item of Generator is 'yield' command that must be inside a function.
+\textbf{Example:\\}
+$>>>$def indexer(text):\\
+
+$>>>$\hspace*{14pt}for i,char in enumerate(text):\\
+
+$>>>$\hspace*{28pt}yield i,char\\
+
+$>>>$res = indexer('Mahdi')\\
+
+$>>>$next(res)\\
+
+Just run this function and run next(res) as many times as the length of res. see what will happen...\\\\
+\newpage
+
+%..............................................................................................................
+% Sublime Text Editor Hotkeys
+\section{\colorbox {Abi}{\color{white}{{\textbf {\Large Sublime Text Editor Hotkeys}}}}}
+\subsection{\colorbox {matgreen}{\color{white}{\large First, install Package Control}}}
+Install Package Control since it's a very useful module to install other modules. You can install it while you are inside Sublime Text environment by pressing {\textbf{\color{Red}{Ctrl+Shift+P}}}.\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Conda}}}
+After installing Package Control, press {\textbf{\color{Red}{Ctrl+Shift+P}}}, then type Package Control. Now, all the commands related to Package Control, including installing a package, or removing a package will appear. Select install Package and type Conda in the upcoming window. By installing Conda, you can have your Anaconda running inside.\\
+Now, in Tools>Build System, select Conda.\\
+You can configure settings to paths if necessary in Tools>Package Settings$>$ Conda$>$ Settings - User. (Only if you changed paths when you were installing Anaconda).\\
+
+After Conda is installed, by pressing {\textbf{\color{Red}{Ctrl+Shift+P}}}, and typing Conda, related commands will pop up and you can select them. Creating an environment, Activating it, etc. Select Activate Environment, and among all environments you have, select the one you want to work with.\\
+Finally, save your file in a location with .py extension.\\
+Now, everything is up and running. You can {\textbf{\color{Red}{compile the code by pressing Ctrl+B}}}.\\
+Enjoy coding in Sublime.\\\\
+
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Some Handy tips and Hotkeys}}}
+By pressing the {\textbf{\color{Red}{'Middle-Mouse-Button'}}} and selecting a few things, you will understand that you are able to select different things from different lines in a specific row or column, and edit them all together..... Suuuuperb!!\\
+
+Also, by {\textbf{\color{Red}{holding Ctrl, and click multiple places}}}, you can edit all those places at once.\\
+
+You can have {\textbf{\color{Red}{multiple .py files opened in different tabs}}}. By pressing {\textbf{\color{Red}{Ctrl+P}}}, you can easily {\textbf{\color{Red}{navigate through them from the pane}}} that will pop up.\\
+
+By pressing {\textbf{\color{Red}{Ctrl+D}}}, you can select a word your typing indicator stays on and by pressing {\textbf{\color{Red}{Ctrl+D}}} multiple times, all the same words will be selected from later lines and you are able to change them at once... Awesome!\\
+
+By pressing {\textbf{\color{Red}{Ctrl+Shift+D}}}, you can {\textbf{\color{Red}{copy a line}}}... without even selecting the whole line; It's just enough that your typing indicator to be in that line...\\
+
+By pressing {\textbf{\color{Red}{Ctrl+/, you can comment the lines}}}.\\
+
+{\textbf{\color{Red}{Moving a code line up or down}}}... Now, this is a real deal here... Remember when you wanted to bring a line above... All that cut and paste shit... Now, by pressing {\textbf{\color{Red}{Ctrl+Shift+up/down}}}, you can really save your time.\\
+
+Speak of {\textbf{\color{Red}{cutting}}} sth, without highlighting, only if your indicator is at the line, just press {\textbf{\color{Red}{Ctrl+X}}} and enjoy this powerful editor.\\
+
+Select current lines and keep selecting next lines by {\textbf{\color{Red}{Ctrl+L}}}.\\
+Also, you can edit these selected lines by {\textbf{\color{Red}{Ctrl+Shift+L}}}.\\
+
+If you are in the middle of the line and you want to remove the rest till the end of it, you usually use Shift+end buttons to select that and then delete it. But, by pressing {\textbf{\color{Red}{Ctrl+Shift+delete, it will remove the rest of the line}}}.\\ 
+{\textbf{\color{Red}{Ctrl+Shift+Backspace}}} will delete texts from your indicator to the head of the line\\
+
+{\textbf{\color{Red}{Ctrl+Backspace}}}, will delete a word.\\
+
+There will be a beter PDF file in here inside the Misc folder. Thanks for reading.\\\\
+
+
+
+
+
+
+
+
+%..............................................................................................................
+
+
+% Glob
+\section{\colorbox {Abi}{\color{white}{{\textbf {\Large Have your files with Glob Library}}}}}
+\subsection{\colorbox {matgreen}{\color{white}{\large import glob}}}
+Imports the library.\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large glob.glob('*')}}}
+Shows whatever thing is in the Current Working Directory (CWD).\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large glob.glob('*.png')}}}
+Shows all .png files in the CWD.\\ 
+You can do it with any other extension.\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large glob.glob('R*')}}}
+Shows all the files is in the CWD starting with R\\\\
+
+%..............................................................................................................
+% Matplotlib Library
+\section{\colorbox {Abi}{\color{white}{{\textbf {\Large matplotlib Library}}}}}
+
+\subsection{\colorbox {matgreen}{\color{white}{\large import matplotlib.pypelot as plt}}}
+\textbf{import matplotlib.pypelot as plt $\Rightarrow$} Imports the library matplotlyb.pypelot and names it as plt\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large plt.plot(...)}}}
+\textbf{plt.plot(...) $\Rightarrow$} plots something... you can use "scatter","stem" etc instead of "plot" in "plt.plot()" command\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large plt.show()}}}
+\textbf{plt.show() $\Rightarrow$} plt.plot(variable) will make it ready to be shown by plt.show(), so if you want to see your figures, use it!\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large plt.xlabel(name)}}}
+\textbf{plt.xlabel(name) $\Rightarrow$} Puts a label on x-axis. You can do the same with plt.ylabel(name) for y-axis.\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Subplots}}}
+\textbf{plt.subplot(mnp) $\Rightarrow$} m*n grid plot, which the p\^{h} elements (column-wise) would be plotted now. \textbf{\textcolor{important}{Remember to put the settings in yout IDE (Mine was Spyder) to use "Qt" to show the plots. It is available in Spyder IDE in "Tools (tab)$>$Preferences$>$Ipython console$>$Graphics (tab)$>$ Graphics Backend$>$ Put it on Qt4 or Qt5".It affects new kernels.}}\\\\
+\textbf{Example:\\}
+
+$>>>$plt.subplot(131)\\
+
+$>>>$plt.plot(Something)\\
+
+$>>>$plt.subplot(132)\\
+
+$>>>$plt.plot(Something)\\
+
+$>>>$plt.subplot(133)\\
+
+$>>>$plt.plot(Something)\\
+
+$>>>$plt.show()\\\\
+
+%..............................................................................................................
+
+\newpage
+
+%..............................................................................................................
+% OS Library
+\section{\colorbox {Abi}{\color{white}{{\textbf {\Large os Library}}}}}
+
+\subsection{\colorbox {matgreen}{\color{white}{\large import os}}}
+\textbf{import os $\Rightarrow$} Imports the library\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large os.getcwd()}}}
+\textbf{os.getcwd() $\Rightarrow$} Would show the current working directory\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large os.mkdir('name')}}}
+Creates a directory with the name 'name'.\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large os.removedirs('name')}}}
+Removes the directory with the name 'name'.\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large os.chdir(Newdirectory)}}}
+\textbf{os.chdir(Newdirectory) $\Rightarrow$} Would change the current directory to the new one. Remember to put two \textbackslash s instead of one \textbackslash
+\textbf{Example:\\}
+
+$>>>$os.chdir('C:\textbackslash\textbackslash Users\textbackslash\textbackslash Mahdi\textbackslash\textbackslash Desktop\textbackslash\textbackslash Datasets to work on')\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large os.path.join(Further Address)}}}
+\textbf{os.path.join(Further Address) $\Rightarrow$} Adds a piece of address to your previous address.\\\\
+\textbf{Example:\\}
+
+$>>>$Address = os.chdir('C:\textbackslash\textbackslash Users\textbackslash\textbackslash Mahdi\textbackslash\textbackslash Desktop\textbackslash\textbackslash Datasets to work on')\\
+
+$>>>$NewAddress = os.path.join(Address,''Cars'')\\
+
+$>>>$print(NewAddress)\\
+
+\hspace{14pt} 'C:\textbackslash Users\textbackslash Mahdi\textbackslash Desktop\textbackslash Datasets to work on\textbackslash Cars')\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large os.walk}}}
+You have to use it in the way explained below to be able to get all directories, subdirectories, and all files in a directory.\\\\
+\textbf{Example:\\}
+
+
+
+$>>>$for a,b,c in os.walk(os.getcwd()):\\
+
+$>>>$\hspace*{28pt}print(f"a:{a}")\\
+
+$>>>$\hspace*{28pt}print(f"b:{b}")\\
+
+$>>>$\hspace*{28pt}print(f"c:{c}")\\
+
+Just test it to see how it works.\\\\
+
+
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large To Loop over files in a directory}}}
+Do as below:\\\\
+\textbf{Example:\\}
+
+$>>>$directory = os.getcwd()\\{\textcolor{brown}{\# Comment}}\\
+
+$>>>$for filename in os.listdir(directory):\\{\textcolor{brown}{\# os.listdir(directory) lists everything inside the directory}}\\
+
+$>>>$\hspace*{28pt}if filename.endswith(".asm") or filename.endswith(".py"):\\{\textcolor{brown}{\# filename.endswith('extension') searches for the files that have the specified extension in the listed items in directory}}\\
+
+$>>>$\hspace*{42pt}print(os.path.join(directory, filename))\\
+
+YOU CAN DO THIS WITH pathlib LIBRARY TOO. JUST GO TO THE pathlib SECTION.\\
+
+There is also a good other function that can give the filename and extensions:
+
+$>>>$for file in os.listdir():\\
+
+$>>>$\hspace*{28pt}filename,file\_extension = os.path.splitext(file)\\
+
+$>>>$\hspace*{28pt}print(f'Filename = {[filename]} \&\& File\_extension ={[file\_extension]}')\\\\
+
+%..............................................................................................................
+
+\newpage
+
+%..............................................................................................................
+% Numpy Library
+\section{\colorbox {Abi}{\color{white}{{\textbf {\Large numpy Library}}}}}
+\subsection{\colorbox {matgreen}{\color{white}{\large import numpy as np}}}
+\textbf{import numpy as np $\Rightarrow$} Imports numpy library and makes np as the contraction name for numpy library\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large np.array(list)}}}
+\textbf{x=np.array(list) $\Rightarrow$} Makes the 'list' a numpy array\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Dimension and Shape}}}
+\textbf{np.dim() \&\& np.shape() $\Rightarrow$} We can use both of these commands in order to get the dimension or shape of any types of data like tuple, list, dict, etc...\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large np.array(list).astype('float')}}}
+\textbf{x=np.array(list).astype('float') $\Rightarrow$} Makes the 'list' a numpy array with float type elements. There are some good functions for numpy arrays like:\\\\
+
+$>>>$np.max(){\textcolor{brown}{\# Gives the maximum value in the array (or matrix)}}\\
+
+$>>>$np.min(){\textcolor{brown}{\# Gives the minimum value.}}\\
+
+$>>>$np.mean(){\textcolor{brown}{\# Calculates the mean.}}\\
+
+$>>>$np.argmax(){\textcolor{brown}{\# Gives the index refering to the maximum value in the array (or matrix).}}\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Reshape}}}
+\textbf{x.reshape(size,order=) $\Rightarrow$} Reshapes the data in specific size with sepecific order. order values are : order='C', order = 'F',order='A'\\
+
+ ‘C’ means to read / write the elements using C-like index order, with the last axis index changing fastest, back to the first axis index changing slowest. ‘F’ means to read / write the elements using Fortran-like index order, with the first index changing fastest, and the last index changing slowest. Note that the ‘C’ and ‘F’ options take no account of the memory layout of the underlying array, and only refer to the order of indexing. ‘A’ means to read / write the elements in Fortran-like index order if a is Fortran contiguous in memory, C-like order otherwise.\\\\
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large np.loadtxt(rawdata,delimiter=",")}}}
+\textbf{x=np.loadtxt(rawdata,delimiter=",") $\Rightarrow$} Turns a CSV file which is loaded by {\colorbox{matgreen}{\color{white}{open(filename,'rt')}}} in the directory, into a numpy array with float values.\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large np.dstack(TUP)}}}
+The code concatenates two vectors,matrices, whatever, in 3rd axis (depth). Consider a,b be both vectors of dimension (M,) . np.dstack((a,b)) returns a (1,M,2) tensor since first, a dimension will be added to both so they become (M,1). Then another dimension is inserted, this time to the head and makes it (1,M,1) for each a,b. And finally, both will be concatenated along the third axis. The result is a (1,M,2) tensor.\\
+
+There is a difference between np.dstack(TUP) and np.concatenate(TUP,axis=2). First, in \textbf{np.concatenate(TUP,axis)}, the axis values are in range (0,1,2,...) where 0 is rows, 1 columns, 2 depth ,3 higher dimension,etc. So now, we want to concatenate a,b vectors with dimension (M,) on the third dimension. a[:,None] will add another dimension to a , so a becomes (M,1).  \textbf{np.concatenate((a[:,None,None],b[:,None,None]),axis=2)} will get us a tensor of shape (M,1,2).\\
+
+\textbf{np.hstack((a,b))} concatenates a and b on rows so it will give a (2*M,) dimension matrix.\\
+
+\textbf{np.vstack((a,b))} concatenates a and b on columns so it will give a (2,M) dimension matrix. It goes vertically... So, we have two flat vecs a=[1,2,3] and b=[4,5,6],
+It'll go vertically like [[1,4],[2,5],[3,6]].\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large np.ndarray VS np.array}}}
+No differences... But, np.array is much more high-level, so use np.array all the time.
+
+%..............................................................................................................
+
+\newpage
+
+%..............................................................................................................
+% Pandas Library
+\section{\colorbox {Abi}{\color{white}{{\textbf {\Large pandas Library}}}}}
+\subsection{\colorbox {matgreen}{\color{white}{\large import pandas}}}
+\textbf{import pandas $\Rightarrow$} Imports pandas library\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large from pandas import read\_csv}}}
+\textbf{from pandas import read\_csv $\Rightarrow$} Imports a sublibrary that is expert to open csv files and turn them into "Pandas Data Frames"\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large pandas.Series(data=Data, index=labels)}}}
+\textbf{panda.Series $\Rightarrow$} Makes a labeld vector from one dimensional Data.\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large pandas.DataFrame(data=Data, index = rowlabels , columns = column labels)}}}
+\textbf{pandas.DataFrame $\Rightarrow$} Makes a row\&column labled dataset. One can refer to the labeled data in "method" way:\\\\
+\textbf{Example:\\}
+
+$>>>$a=[[2,4,5],[4,3,2]]\\
+
+$>>>$rows = ['first','second']\\
+
+$>>>$column = ['one','two','three']\\
+
+$>>>$Data=pandas.DataFrame(a,index=rows,columns=column)\\
+
+$>>>$Data\\
+
+\hspace{14pt} one  two  three\\
+first \hspace*{16pt}2\hspace*{14pt}4\hspace*{14pt}5\\
+second\hspace*{8pt}4\hspace*{14pt}3\hspace*{14pt}2\\
+
+$>>>$Data.one\\
+
+first\hspace*{14pt}2\\
+\hspace*{14pt}second    4\\
+\hspace*{14pt}Name: one, dtype: int64\\
+
+$>>>$Data.three\\
+
+first\hspace*{14pt}5\\
+\hspace*{14pt}second    2\\
+\hspace*{14pt}Name: one, dtype: int64\\
+
+\#Notice that this method only works for column labels, not for rows\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large read\_csv(filename,names=Names)}}}
+\textbf{Dataset = read\_csv(...) $\Rightarrow$} Makes a DataFrame out of a CSV file (Comma Seperated Value file). It loads the dataset and tags the Names on each column of it. If the dataset exists in the current directory, filename is only the name of the file plus its extension; Otherwise, you have to refer the whole address of the dataset plus name and extension of the file. One can use a URL address instead of filename as well.\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large DATA.head(\#)}}}
+\textbf{DATA.head(\#) $\Rightarrow$} If DATA is a pandas DataFrame, this .head(\#) method would show the first \# rows of the dataset, in order to have a quick perspective.\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Data.dtypes}}}
+\textbf{Data.dtypes $\Rightarrow$} Represents every column's datas' types. \\\\
+
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Data.describe()}}}
+\textbf{x=Data.describe() $\Rightarrow$} Gives the necessary statistical information on the data like "mean" , "standard deviation" , etc. You can also set some options related to the percision like : set\_option('precision',3) which sets the decimal point precision. \\\\
+
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Data.groupby('GROUP NAME').size()}}}
+\textbf{Data.groupby('GROUP NAME').size() $\Rightarrow$} Returns the number of occurance for each value in the specified group (column) of the data. "GROUP NAME" is the name of the column in the dataset.\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Data.pop('GROUP NAME')}}}
+Picks the specified column from the dataset and stores it in any variable you want.\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Data.loc[index]}}}
+Shows the specified row from the dataset woith its full features.\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Data.isna()}}}
+Shows "unknown" or "None" values in the dataset.\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Data.isna().sum()}}}
+Counts "unknown" or "None" values in the dataset.\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Data.dropna()}}}
+We'll get rid of "unknown" or "None" values in the dataset.\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Data.corr(method='pearson')}}}
+\textbf{ Data.corr(method='pearson') $\Rightarrow$} gives the correlation of the data with each other by using "pearson" method. There are other methods for calculating the correlation like "spearman" or "kendall". \\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Plotting Correlation Graph}}}
+Imagine you loaded the dataset and named it as DATA.Watch the example below to learn how to do it:\\\\
+\textbf{Example:\\}
+
+$>>>$correlations = DATA.corr()\\
+
+$>>>$fig = plt.figure()\\{\textcolor{brown}{\# Have to store in order to make changes in it.}}\\
+
+$>>>$ax = fig.add\_subplot(111)\\{\textcolor{brown}{\# A 1 by 1 plot. }}\\
+
+$>>>$cax = ax.matshow(correlations , vmin = -1 , vmax = 1)\\{\textcolor{brown}{\# Plots the correlation matrix}}\\
+
+$>>>$fig.colorbar(cax)\\{\textcolor{brown}{\# Places a colorbar next to the main plot relevant to the correlation matrix plotted there.}}\\
+
+$>>>$names = ['preg','plas','pres','skin','test','mass','pedi','age','class']\\{\textcolor{brown}{\# Makes names}}\\
+
+$>>>$ticks = np.arange(0,9,1)\\{\textcolor{brown}{\# Arange the numbers based on the classes of your database. Mine are nine classes.}}\\
+
+$>>>$ax.set\_xticks(ticks)\\{\textcolor{brown}{\# You have to pass this step to correctly be able to label your data. Otherwise, the labels are goanna be tagged in a wrong manner. This would tell the correlation chart to count the classes from 0 to 9}}\\
+
+$>>>$ax.set\_yticks(ticks)\\{\textcolor{brown}{\# Same manners like previous line of code.}}\\
+
+$>>>$ax.set\_xticklabels(names)\\{\textcolor{brown}{\# Names all the columns}}\\
+
+$>>>$ax.set\_yticklabels(names)\\{\textcolor{brown}{\# Names all the rows}}\\
+
+$>>>$ax.set\_xlabel('DATA CLASSES')\\{\textcolor{brown}{\# Sets the main label for x-axis}}\\
+
+$>>>$ax.set\_ylabel('DATA CLASSES')\\{\textcolor{brown}{\# Sets the main label for y-axis}}\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Pipeline in pandas}}}
+Pipelines generally are used to do a number of functions sequentially. Imagine you have two different functions : func1 and func2 , whose parameters are (DataFrame , Column). If your Pandas.DataFrame structure name is "data" for example, the following command will apply all functions on the column "Age" of "data" DataFrame. \\\\
+\textbf{Example:\\}
+
+$>>>$automation = data.pipe(func1 , Col='Age') , data.pipe(func2 , Col='Age')\\
+
+{\textcolor{brown}{\# In this way, you will have an automatic way of doing several functions on several groups of data.}}\\
+
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Data.skew()}}}
+\textbf{Data.skew() $\Rightarrow$} Gives the skew of a Normal Gaussian distributed data. Poitive skew means that the data histogram is right taled; Better to say it's concentration is on the left part. And Negative skew means that the data histogram is left taled; It means that the concentration is on the right side. The skew formula is $\frac{(mean-median)}{std}$\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Normalizing}}}
+We can normalize the data:\\\\
+\textbf{Example:\\}
+
+Everything is clear from the code.\\
+
+$>>>$des = dataset.describe().transpose()\\
+
+$>>>$new\_dataset = (dataset - des['mean']) / des['std']
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Test,Train Split}}}
+You can do splitting on the dataset:\\\\
+\textbf{Example:\\}
+
+Everything is clear from the code.\\
+
+$>>>$train = dataset.sample(frac=0.6 , random\_state = seed)\\
+
+$>>>$valid = dataset.drop(train.index)\\
+
+$>>>$validation = valid.sample(frac=0.4 , random\_state = seed)\\
+
+$>>>$test = valid.drop(validation.index)\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large One Hot Encoding}}}
+You can do a one hot encoding by two ways for your dataset:\\\\
+\textbf{Method I:\\}
+
+Imagine that the 'sex' feature of your dataset is a categorical feature containing only 'male' and 'felmale' as values.\\
+
+$>>>$dataset['sex'] = dataset['sex'].map(\{'female':0 , 'male':1\})\\
+
+{\textcolor{brown}{\# Easy peasy}}\\
+
+\textbf{Method II:\\}
+
+You can do it automatically by this command of pandas:\\
+
+$>>>$new\_data = pd.get\_dummies(dataset)\\
+
+{\textcolor{brown}{\# It's actually doing a one hot encoding for it... And added them to your features.}}\\
+
+\textbf{Method III:\\}
+
+This method is for categorical features that are represented as numbers. For example, the samples are in 4 classes determined by 0,1,2,3 digits. You can do a one hot encoidng on this feature as below:
+
+$>>>$dataset['class'].unique(){\textcolor{brown}{\# Checks the unique things in class. In our example, it will return 0,1,2,3}}\\
+
+\hspace*{14pt}array([0,2,1,3] , dtype=int64)\\
+
+$>>>$dataset['class'] = dataset['class'].map(\{0:'class1' , 1:'class2' , 2:'class3' , 3:'class4'\})\\
+
+{\textcolor{brown}{\# First, we replace the 0,1,2,3 with class1,class2,class3,class4.}}\\
+
+$>>>$new\_data = pd.get\_dummies(dataset)\\
+
+{\textcolor{brown}{\# Finally, we change it.}}\\
+
+
+{\textcolor{brown}{\#\#\#\#\# There are some arguments in pd.get\_dummies() like prefix , prefix\_sep. If you pass nothing, prefix will be the previous feature name and prefix\_sep will be \_. You can change these like for example: prefix='@' , prefix\_sep ='\^' }}\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large data.hist()}}}
+\textbf{data.hist() $\Rightarrow$} Prepares the histogram plots for all the columns (groups or classes) of the data in one figure. This will be shown by the command plt.show().\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large data.plot(Options)}}}
+\textbf{data.plot(kind = 'density' , subplots = True , layout = (subplot dimension... like (3,3)) , sharex = False or True , sharey = False or True) $\Rightarrow$} Would plot different figures for all the groups with a few settings. Like density figure which is declared in "kind" option. There are other "kind"s as well, like " line " , " bar  , " barh " , " box " , " kde" , "density" , "area" , "pie" , "scatter" , "hexbin". subplot option must be turned on if you want to plot for all of the groups, and the dimension should match the number of your sub classes. The last options are sharey and sharex that if they are set to "True", the axis x or y related to sharex or sharey, wouldn't be scaled properly. Otherwise, if you set it to "False", the scale is shown. 
+density plot, is like histogram with continues lines. And box, is a special type of plot that draws a box around the middle 50\% of the data; Meaning it covers the 25th percentile upto 75th percentile. Also there is a line inside the box remarking the median.\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large DATA.values}}}
+\textbf{x=DATA.values $\Rightarrow$} Turns a DataFrame into a numpy array. So, it would be indexed normally with ""[]"". Otherwise, if it was a DataFrame, it would have been refrenced by its class names. (DATA.park or DATA['park'] \\\\
+
+%..............................................................................................................
+
+\newpage
+
+%..............................................................................................................
+% Seaborn Library
+\section{\colorbox {Abi}{\color{white}{{\textbf {\Large seaborn Library}}}}}
+\subsection{\colorbox {matgreen}{\color{white}{\large import seaborn as sns}}}
+\textbf{import seaborn as sns $\Rightarrow$} Imports the seaborn library useful for statistical data analysis.\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Correlation Matrix}}}
+\textbf{sns.heatmap(CorrMat , annot=True , vmin=-1 , vmax = 1) $\Rightarrow$} Returns a figure containing the correlation of all of the groups of a DataFrame within (-1,1). CorrMat can be data.corr(). annot, means the number in each cell. Run the code with and without it to understand.\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Scatter Matrix}}}
+\textbf{sns.pairplot(dataset) $\Rightarrow$} Returns the scatter-matrix related to the dataset.\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Scatter Matrix II}}}
+\textbf{sns.pairplot(dataset,hue='class') $\Rightarrow$} All attributes in relation with "class" for classification possibility checking\\\\
+
+%..............................................................................................................
+
+\newpage
+
+%..............................................................................................................
+% Scikit-Learn Library
+\section{\colorbox {Abi}{\color{white}{{\textbf {\Large sklearn Library}}}}}
+\subsection{\colorbox {matgreen}{\color{white}{\large from sklearn.preprocessing import MinMaxScaler}}}
+\textbf{from sklearn.preprocessing import MinMaxScaler $\Rightarrow$} Would import the "MinMaxScaler" algorithm from preprocessing part of sklearn library suitable for scaling the data between 0 and 1.\\\\
+\textbf{Example:\\}
+
+$>>>$scaler = MinMaxScaler(feature\_range(0,1)){\textcolor{brown}{\# Sets the range of normalization}}\\
+
+$>>>$rescaled = scaler.fit\_transform(DATA){\textcolor{brown}{\# Applies the normalization to the DATA.}}\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large from sklearn.preprocessing import StandardScaler}}}
+\textbf{from sklearn.preprocessing import StandardScaler $\Rightarrow$} Imports the StandardScaler library that will scale the dataset with the mean being 0 and the std being 1.{\textbf{\textcolor{important}{Linear Regression or Logistic Regression are the algorithms the StandardScaler is useful and the times one wants to make a standard Gaussian Distributed input.}}}\\\\
+\textbf{Example:\\}
+
+$>>>$scaler = StandardScaler().fit(DATA){\textcolor{brown}{\# Sets the required setting.}}\\
+
+$>>>$rescaled = scaler.transform(DATA){\textcolor{brown}{\# Applies the changes.}}\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large from sklearn.preprocessing import Normalizer}}}
+\textbf{from sklearn.preprocessing import Normalizer $\Rightarrow$} Imports the library to normalize the data. {\textbf{\textcolor{important}{Normalizing would be used for sparsed Data and K-Nearest Algorithms.}}}\\\\
+\textbf{Example:\\}
+
+$>>>$scaler = Normalizer().fit(DATA){\textcolor{brown}{\# Sets the required setting.}}\\
+
+$>>>$normalized = scaler.transform(DATA){\textcolor{brown}{\# Applies the changes.}}\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large from sklearn.preprocessing import Binarizer}}}
+\textbf{from sklearn.preprocessing import Binarizer $\Rightarrow$} Imports the library to make a binary representation of the data.\\\\
+\textbf{Example:\\}
+
+$>>>$scaler = Binarizer(threshold=0.0).fit(DATA){\textcolor{brown}{\# Sets the required setting.}}\\
+
+$>>>$binarized\_data = scaler.transform(DATA){\textcolor{brown}{\# Applies the changes.}}\\
+
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large SelectKBest(score\_func=chi2,k=4)}}}
+\textbf{The above code $\Rightarrow$} Would be used for feature selection. It would use the scoring statistical function "chi2" in order to select the k best scored features and keep them as the necessary features for all of the classes in dataset. {\textbf{\textcolor{important}{It will select the features which has the strongest relationships with the output.}}}You will have to import two libraries and then apply this algorithm on the training and target sets as below:\\\\
+\textbf{Example:\\}
+
+$>>>$from sklearn.feature\_selection import SelectKBest{\textcolor{brown}{\# Imports the library SelectKBest}}\\
+
+$>>>$from sklearn.feature\_selection import chi2{\textcolor{brown}{\# Imports the scoring function chi2}}\\
+
+$>>>$array = DATA.values{\textcolor{brown}{\# Turns the pandas DataFrame into an array}}\\
+
+$>>>$X = array[:,0:8]\\{\textcolor{brown}{\# Selects 8 classes of the dataset to be as training sets}}\\
+
+$>>>$Y = array[:,8]\\{\textcolor{brown}{\# Puts the last to be as the target set.}}\\
+
+$>>>$test = SelectKBest(score\_func\_chi2 , k=4)\\{\textcolor{brown}{\#Enables the algorithm that selects the 4 best classes for all of the dataset with chi2 statistical algorithm}}\\
+
+$>>>$fit = test.fit(X,Y)\\{\textcolor{brown}{\# The algorithm is applied to X,Y... So best scores to get from X to Y are selected}}\\
+
+$>>>$print(fit.scores\_)\\{\textcolor{brown}{\# Prints out the scores related to each class of the dataset X. The top score classes are goanna be selected.}}\\
+
+$>>>$features = fit.transform(X)\\{\textcolor{brown}{\# Now applies the transform to X. So we have the features we want for training.}}\\
+
+$>>>$print(array.shape)\\{\textcolor{brown}{\# Main dataset dimension}}\\
+
+\hspace{14pt} (768,9)\\
+
+$>>>$print(X.shape)\\{\textcolor{brown}{\# Training dataset dimension}}\\
+
+\hspace{14pt} (768,8)\\
+
+$>>>$print(features.shape)\\{\textcolor{brown}{\# The selected features for training shape.}}\\
+
+\hspace{14pt} (768,4)\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large PCA(n\_components=N)}}}
+\textbf{The code $\Rightarrow$} Is for PCA algorithm to reduce data size. It chooses N \\\\
+\textbf{Example:\\}
+
+$>>>$Python code\\{\textcolor{brown}{\# Comment}}\\
+
+\hspace{14pt} result\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large OneHotEncoding}}}
+
+Makes a categorical thing into numbers. Like male,female seperation which names them 01,10 for example.\\\\
+
+$>>>$from sklearn.preprocessing import OneHotEncoder\\{\textcolor{brown}{\# Imports library}}\\
+
+$>>>$OneHotEncoder().fit(X).transform(X).toarray()\\{\textcolor{brown}{\# Returns the encoded array}}\\
+
+$>>>$OneHotEncoder().fit\_transform(X).toarray()\\{\textcolor{brown}{\# Returns the encoded array (Just like above)}}\\
+
+%..............................................................................................................
+
+\newpage
+
+%..............................................................................................................
+% OpenCV
+\section{\colorbox {Abi}{\color{white}{{\textbf {\Large OpenCV Library}}}}}
+This section, is mainly from "Mastering OpenCV4 with Python" from Alberto Fernandez Villian.
+\subsection{\colorbox {matgreen}{\color{white}{\large import cv2}}}
+\textbf{import cv2 $\Rightarrow$} Imports the OpenCV library.\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Primary Works on Image}}}
+Due to a lot of codes, I'll be explaining this part a little bit different. Mostly, one line code one line comment, and further, with examples.\\\\
+
+
+$>>>$image = cv2.imread('1.jpg')\\{\textcolor{brown}{\# Imports the image in the directory. Becareful that imported image (frames of the videos as well), are in BGR format; Not RBG!! Because it was more popular with cameras.}}\\
+
+$>>>$gray\_image = cv2.imread('1.jpg' , cv2.IMREAD\_GRAYSCALE)\\{\textcolor{brown}{\# Imports the image in gray-scale}}\\
+
+$>>>$height,width,channels=image.shape\\{\textcolor{brown}{\# Gives hiehgt, width, and number of channels of the image (RGB num of channels:3 grayscale:1)}}\\
+
+$>>>$total\_pixels = image.size\\{\textcolor{brown}{\# Number of pixels}}\\
+
+$>>>$image\_type = image.dtype\\{\textcolor{brown}{\# Image type}}\\
+
+$>>>$image\_grayed = cv2.cvtColor(image,cv2.COLOR\_BGR2GRAY)\\{\textcolor{brown}{\# Turns an image into gray. It's a kind of process and you can change any image in everywhere of your code. Just notice at BGR2GRAY. If you had an RGB image, write RGB2GRAY.}}\\
+
+$>>>$modified\_image = image\\
+\hspace*{14pt}$>>>$modified\_image[400:500,400:500,:] = image[600:700,600:700,:]\\{\textcolor{brown}{\# You can modify images.}}\\
+
+$>>>$B,G,R = cv2.split(image)\\{\textcolor{brown}{\# You can split the channels of an image}}\\
+
+$>>>$RGB\_image = cv2.merge([R,G,B])\\{\textcolor{brown}{\# You can merge the channels and create a colorful image with any format you like! RGB or BGR. In this code, we created an RGB image.}}\\
+
+$>>>$b = image[:,:,0]\\
+\hspace*{14pt}$>>>$g = image[:,:,1]\\
+\hspace*{14pt}$>>>$r = image[:,:,2]\\
+\hspace*{14pt}$>>>$rgb\_image = image[:,:,::-1]\\
+\hspace*{14pt}$>>>$rgb\_image\_gray = cv2.cvtColor(rgb\_image,cv2.COLOR\_RGB2GRAY)\\{\textcolor{brown}{\# Working with Numpy library to split channels, and build an RGB image. Last line of code is making the RGB image in gray-scale.}}\\
+
+$>>>$con\_image\_1 = np.concatenate((gray\_image,image\_grayed),axis=1)\\
+\hspace*{14pt}$>>>$con\_image\_2 = np.concatenate((RGB\_image,rgb\_image),axis=1)\\
+\hspace*{14pt}$>>>$con\_image\_3 = np.concatenate((RGB\_image\_gray,rgb\_image\_gray),axis=1)\\{\textcolor{brown}{\# A little numpy to stick a few pictures together horizontally(axis = 1) or vertically(axis = 0)}}\\
+
+$>>>$cv2.imshow("Title",image)\\{\textcolor{brown}{\# Shows the image. The title must be set. It's the title of the windows displaying the image.}}\\
+
+$>>>$cv2.waitKey()\\{\textcolor{brown}{\# Without this command, you can not see the displayed image. You can set time in mili-seconds inside parantheses to specify the duration of the display.}}\\
+
+$>>>$cv2.destroyAllWindows()\\{\textcolor{brown}{\# It's necessary if you want to get rid of the display window and shut it with any keys on your keyboard.}}\\
+
+$>>>$plt.figure,plt.subplot(nmp),plt.imshow(image)\\{\textcolor{brown}{\# You can display images with pyplot.imshow and subplots too.}}\\
+
+$>>>$cv2.imwrite('Gray.jpg',image\_grayed)\\{\textcolor{brown}{\# Finally, you can export the image with cv2.imwrite command, in your working directory. It needs a name and the image to export as arguments.}}\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Primary Works on Video}}}
+Explainations will be like the last sub-section.\\\\
+
+$>>>$video = cv2.VideoCapture('1.mp4')\\{\textcolor{brown}{\# Imports the video. If you put a URL address related to your public camera, it would get that video for you. Or, if you put 0 (zero) as the argument, it would get your webcam as the input video.}}\\
+
+$>>>$video.isOpened()\\{\textcolor{brown}{\# Checks if video is loaded correctly and available to process}}\\
+
+$>>>$ret, frame = video.read()\\{\textcolor{brown}{\# reads the first frame and saves it as frame. and ret is True if this action is done}}\\
+
+Codes below would give you properties about the video. The \textbf{Bold} ones are more important than the others.
+
+$>>>$\textbf{video.get(cv2.CAP\_PROP\_FRAME\_WIDTH)}\\
+\hspace*{14pt}$>>>$\textbf{video.get(cv2.CAP\_PROP\_FRAME\_HEIGHT)}\\
+\hspace*{14pt}$>>>$\textbf{video.get(cv2.CAP\_PROP\_FPS)}\\
+\hspace*{14pt}$>>>$\textbf{video.get(cv2.CAP\_PROP\_POS\_MSEC)}\\
+\hspace*{14pt}$>>>$\textbf{video.get(cv2.CAP\_PROP\_POS\_FRAMES)}\\
+\hspace*{14pt}$>>>$\textbf{decode\_fourcc(capture.get(cv2.CAP\_PROP\_FOURCC))}\\
+\hspace*{14pt}$>>>$\textbf{video.get(cv2.CAP\_PROP\_FRAME\_COUNT)}\\
+\hspace*{14pt}$>>>$video.get(cv2.CAP\_PROP\_MODE)\\
+\hspace*{14pt}$>>>$video.get(cv2.CAP\_PROP\_BRIGHTNESS)\\
+\hspace*{14pt}$>>>$video.get(cv2.CAP\_PROP\_CONTRAST)\\
+\hspace*{14pt}$>>>$video.get(cv2.CAP\_PROP\_SATURATION)\\
+\hspace*{14pt}$>>>$video.get(cv2.CAP\_PROP\_HUE)\\
+\hspace*{14pt}$>>>$video.get(cv2.CAP\_PROP\_GAIN)\\
+\hspace*{14pt}$>>>$video.get(cv2.CAP\_PROP\_EXPOSURE)\\
+\hspace*{14pt}$>>>$video.get(cv2.CAP\_PROP\_CONVERT\_RGB)\\
+\hspace*{14pt}$>>>$video.get(cv2.CAP\_PROP\_RECTIFICATION)\\
+\hspace*{14pt}$>>>$video.get(cv2.CAP\_PROP\_ISO\_SPEED)\\
+\hspace*{14pt}$>>>$video.get(cv2.CAP\_PROP\_BUFFERSIZE)\\
+
+Most of them are clear. The important ones (Bolded ones) are width, height, and FPS of the image; Along side with FOURCC command wich will give the codec of the video. The function "decode\_fourcc" is as below:\\
+
+$>>>$def decode\_fourcc(fourcc):\\
+\hspace*{56pt}{\textcolor{brown}{"""Decodes the fourcc value to get the four chars identifying it"""}\\
+\hspace*{56pt}{\textcolor{brown}{\# Convert to int:}\\
+\hspace*{14pt}$>>>$\hspace*{28pt}fourcc\_int = int(fourcc)\\
+\hspace*{56pt}{\textcolor{brown}{\# We can do this one line command below, or go the usual way as for loop:}\\
+\hspace*{56pt}{\textcolor{brown}{\# One line:}\\
+\hspace*{14pt}$>>>$\hspace*{28pt}return "".join([chr((fourcc\_int >> 8 * i) \& 0xFF) for i in range(4)])\\
+\hspace*{56pt}{\textcolor{brown}{\# Typical:}\\
+\hspace*{14pt}$>>>$\hspace*{28pt}fourcc\_decode = ""\\
+\hspace*{14pt}$>>>$\hspace*{28pt}for i in range(4):\\
+\hspace*{14pt}$>>>$\hspace*{28pt}int\_value = fourcc\_int >> 8 * i \& 0xFF\\
+\hspace*{14pt}$>>>$\hspace*{28pt}fourcc\_decode += chr(int\_value)\\
+\hspace*{14pt}$>>>$\hspace*{28pt}return fourcc\_decode\\{\textcolor{brown}{\# It's the way to decode the fourcc code into the ASCII mode we all know. We have XDIV, AVC1, AVI etc fourcc codes.}}\\
+
+%..............................................................................................................
+
+\subsubsection{\colorbox {important}{\color{white}{\large How to display a video}}}
+
+\hspace*{14pt}$>>>$while video.isOpened():\\
+\hspace*{14pt}$>>>$\hspace*{28pt}ret,frame = video.read()\\
+\hspace*{14pt}$>>>$\hspace*{28pt}cv2.imshow('Main Video',frame)\\
+\hspace*{14pt}$>>>$\hspace*{28pt}gray\_frame = cv2.cvtColor(frame,cv2.COLOR\_BGR2GRAY)\\
+\hspace*{14pt}$>>>$\hspace*{28pt}cv2.imshow('Gray Video',gray\_frame)\\
+\hspace*{14pt}$>>>$\hspace*{28pt}if cv2.waitKey(30) \& 0xFF == ord('q'):\\{\textcolor{brown}{\# By 0xFF == ord('q') command, you can end and exit the video-displaying window by pressing the 'q' botton. It's just a complicated thing to explain why, so just learn it. You can not put cv2.waitKey() outside of if, otherwise by pressing 'q' botton, you'll only go to the next frame. You can not replace "ord('q')" with 'q' either because 'ord' is necessary.}}\\
+\hspace*{14pt}$>>>$\hspace*{42pt}break\\{\textcolor{brown}{\# It'll break out of the while loop.}}\\
+\hspace*{14pt}$>>>$video.release()\\
+\hspace*{14pt}$>>>$cv2.destroyAllWindows()\\{\textcolor{brown}{\# This is the way to show a video; Frame by frame. Because cv2.waitKey() is a method (function) so break doesn't work in it,You have to bring cv2.waitKey() inside "if" procedure. }}\\
+
+%..............................................................................................................
+
+\subsubsection{\colorbox {important}{\color{white}{\large How to save desired frames}}}
+You can save videos too. Just enter the codes inside while loop, before "if cv2.waitKey(30) \& 0xFF == ord('q')" code. The piece of code is like this example:\\
+
+{\textcolor{brown}{\# Press c on keyboard to save current frame}}\\
+\hspace*{14pt}$>>>$if cv2.waitKey(20) \& 0xFF == ord('c'):\\
+\hspace*{14pt}$>>>$frame\_name = "camera\_frame\_\{\}.png".format(frame\_index)\\
+\hspace*{14pt}$>>>$gray\_frame\_name = "grayscale\_camera\_frame\_\{\}.png".format(frame\_index)\\
+\hspace*{14pt}$>>>$cv2.imwrite(frame\_name, frame)\\
+\hspace*{14pt}$>>>$cv2.imwrite(gray\_frame\_name, gray\_frame)\\
+\hspace*{14pt}$>>>$frame\_index += 1\\{\textcolor{brown}{\# This frame\_index is only a growing number for naming the frame you want to save. Remember to put its value to 0 (zero) before the while loop.}}\\
+
+%..............................................................................................................
+
+\subsubsection{\colorbox {important}{\color{white}{\large How to backward-play a video }}}
+Now, a code to review the video in reverse:\\
+
+{\textcolor{brown}{\# We get the index of the last frame of the video file:}\\
+\hspace*{14pt}$>>>$frame\_index = capture.get(cv2.CAP\_PROP\_FRAME\_COUNT) - 1\\
+\hspace*{14pt}$>>>$print("starting in frame: '\{\}'".format(frame\_index))\\
+
+{\textcolor{brown}{\# Read until video is completed:}\\
+\hspace*{14pt}$>>>$while capture.isOpened() and frame\_index >= 0:\\
+
+{\textcolor{brown}{\# We set the current frame position:}\\
+\hspace*{14pt}$>>>$\hspace*{28pt}capture.set(cv2.CAP\_PROP\_POS\_FRAMES, frame\_index)\\
+
+{\textcolor{brown}{\# Capture frame-by-frame from the video file:}\\
+\hspace*{14pt}$>>>$\hspace*{28pt}ret, frame = capture.read()\\
+
+\hspace*{14pt}$>>>$\hspace*{28pt}if ret is True:\\
+
+{\textcolor{brown}{\# Print current frame number per iteration}\\ {\textcolor{brown}{\#print("CAP\_PROP\_POS\_FRAMES : '\{\}'".format(capture.get(cv2.CAP\_PROP\_POS\_FRAMES)))}\\
+
+{\textcolor{brown}{\# Get the timestamp of the current frame in milliseconds}\\
+{\textcolor{brown}{\# print("CAP\_PROP\_POS\_MSEC : '\{\}'".format(capture.get(cv2.CAP\_PROP\_POS\_MSEC)))}\\
+
+{\textcolor{brown}{\# Display the resulting frame:}\\
+\hspace*{14pt}$>>>$\hspace*{42pt}cv2.imshow('Original frame', frame)\\
+
+{\textcolor{brown}{\# Convert the frame to grayscale:}\\
+\hspace*{14pt}$>>>$\hspace*{42pt}gray\_frame = cv2.cvtColor(frame, cv2.COLOR\_BGR2GRAY)\\
+{\textcolor{brown}{\# Display the grayscale frame:}\\
+\hspace*{14pt}$>>>$\hspace*{42pt}cv2.imshow('Grayscale frame', gray\_frame)\\
+{\textcolor{brown}{\# Decrement the index to read next frame:}\\
+\hspace*{14pt}$>>>$\hspace*{42pt}frame\_index = frame\_index - 1\\
+\hspace*{14pt}$>>>$\hspace*{42pt}print("next index to read: '\{\}'".format(frame\_index))\\
+{\textcolor{brown}{\# Press q on keyboard to exit the program:}\\
+\hspace*{14pt}$>>>$\hspace*{42pt}if cv2.waitKey(25) \& 0xFF == ord('q'):\\
+\hspace*{14pt}$>>>$\hspace*{56pt}break\\
+{\textcolor{brown}{\# Break the loop}\\
+\hspace*{14pt}$>>>$\hspace*{42pt}else:\\
+\hspace*{14pt}$>>>$\hspace*{56pt}break\\
+\hspace*{14pt}$>>>$video.release()\\
+\hspace*{14pt}$>>>$cv2.destroyAllWindows()\\{\textcolor{brown}{\# Hope everything is clear :)}}\\
+
+
+%..............................................................................................................
+
+\subsubsection{\colorbox {important}{\color{white}{\large How to export a video file }}}
+You first have to specify the fourcc code you want the video to be coded into. The whole procedure is displayed to you below:\\
+
+\hspace*{14pt}$>>>$fourcc = cv2.VideoWriter\_fourcc(*'XVID')\\{\textcolor{brown}{\# *'XVID' returns 'X' 'V' 'I' 'D'. You have to enter the fourcc code like that.}}\\
+\hspace*{14pt}$>>>$out\_gray = cv2.VideoWriter("PATH", fourcc, int(fps), (int(frame\_width), int(frame\_height)), False)\\{\textcolor{brown}{\# Last one is for grayscale (True = grayscale... False = Colorful; This doesn't work without cv2.cvtColor(frame,cv2.COLOR\_BGR2GRAY))}\\
+
+
+\hspace*{14pt}$>>>$while capture.isOpened():\\
+{\textcolor{brown}{\# Read the frame from the camera}\\
+\hspace*{14pt}$>>>$\hspace*{28pt}ret, frame = capture.read()\\
+\hspace*{14pt}$>>>$\hspace*{28pt}if ret is True:\\
+
+{\textcolor{brown}{\# Convert the frame to grayscale}\\
+\hspace*{14pt}$>>>$\hspace*{42pt}gray\_frame = cv2.cvtColor(frame, cv2.COLOR\_BGR2GRAY)\\
+{\textcolor{brown}{\# Write the grayscale frame to the video}\\
+\hspace*{14pt}$>>>$\hspace*{42pt}out\_gray.write(gray\_frame)\\
+{\textcolor{brown}{\# We show the frame (this is not necessary to write the video)}\\
+{\textcolor{brown}{\# But we show it until 'q' is pressed}\\
+\hspace*{14pt}$>>>$\hspace*{42pt}cv2.imshow('gray', gray\_frame)\\
+\hspace*{14pt}$>>>$\hspace*{42pt}if cv2.waitKey(1) \& 0xFF == ord('q'):\\
+\hspace*{14pt}$>>>$\hspace*{56pt}break\\
+\hspace*{14pt}$>>>$\hspace*{42pt}else:\\
+\hspace*{14pt}$>>>$\hspace*{56pt}break\\
+
+{\textcolor{brown}{\# Release everything:}\\
+\hspace*{14pt}$>>>$capture.release()\\
+\hspace*{14pt}$>>>$out\_gray.release()\\
+\hspace*{14pt}$>>>$cv2.destroyAllWindows()\\
+
+%..............................................................................................................
+
+\newpage
+
+%..............................................................................................................
+% Pillow Library
+\section{\colorbox {Abi}{\color{white}{{\textbf {\Large Pillow Library}}}}}
+\subsection{\colorbox {matgreen}{\color{white}{\large from PIL import Image}}}
+The code imports the library we want.\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Image.open(image)}}}
+\textbf{myimage = Image.open('file.jpg') $\Rightarrow$}Opens the image and stores it in myimage.\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large myimage.show()}}}
+Shows the image.\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large myimage.save('filename.anyformat'}}}
+You can store the loaded image in any formats you like; .png, .jpg, .jpeg, etc.
+
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Resize(reduce the size only)}}}
+\textbf{myimage.thumbnail(size\_in\_tuple) $\Rightarrow$} Resizes myimage with the size in tuple, like (300,300), passed in the thumbnail function.\\\\
+
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Rotate}}}
+\textbf{myimage.rotate(90) $\Rightarrow$} Rotates the image for you :) \\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Convert}}}
+\textbf{myimage.convert(model='argument') $\Rightarrow$} You have to pass the type of conversion you want as 'argument' to get it. A list of arguments is as below:\\
+
+{\hspace*{14pt}$\bullet{\textbf{1} (1-bit pixels, black and white, stored with one pixel per byte)}$}\\
+
+{\hspace*{14pt}$\bullet{\textbf{L} (8-bit pixels, black and white)}$}\\
+
+{\hspace*{14pt}$\bullet{\textbf{P} (8-bit pixels, mapped to any other mode using a color palette)}$}\\
+
+{\hspace*{14pt}$\bullet{\textbf{RGB}  (3x8-bit pixels, true color)}$}\\
+
+{\hspace*{14pt}$\bullet{\textbf{RGBA} (4x8-bit pixels, true color with transparency mask)}$}\\
+
+{\hspace*{14pt}$\bullet{\textbf{CMYK} (4x8-bit pixels, color separation)}$}\\
+
+{\hspace*{14pt}$\bullet{\textbf{YCbCr} (3x8-bit pixels, color video format)}$}\\
+
+etc...\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Filtering}}}
+\textbf{from PIL import ImageFilter $\Rightarrow$} With this library you can put so many filters on your picture.\\\\
+\textbf{Example:\\}
+
+$>>>$from PIL import Image ImageFilter\\{\textcolor{brown}{\# Imports both "Image" and "ImageFilter" libraries.}}\\
+
+$>>>$myimage = Image.open('image.jpg')\\
+
+$>>>$new\_image = myimage.filter(ImageFilter.GaussianBlur(\#))\\{\textcolor{brown}{\# Makes it blur and more blur as \# increases.}}\\
+
+%..............................................................................................................
+
+
+\newpage
+
+%..............................................................................................................
+% Pickle Library
+\section{\colorbox {Abi}{\color{white}{{\textbf {\Large Pickle Library}}}}}
+\subsection{\colorbox {matgreen}{\color{white}{\large Pickle}}}
+Good for loading and a kind of algorithm to serialize and save a data. Let's say we have something like a dictionary to save. Let's go as below:\\\\
+\textbf{Example:\\}
+
+$>>>$import pickle{\textcolor{brown}{\# Imports the library}}\\
+
+{\textcolor{brown}{\# To Save a Pickle File}}\\
+
+$>>>$outpickle=pickle.open('Mydesiredpickle','wb'){\textcolor{brown}{\# Opens a pickle protocol in writing mode to save our pickle with desired name in CWD.}}\\
+
+$>>>$pickle.dump(dictionary,outpickle){\textcolor{brown}{\# Creates the pickle for us.}}\\
+
+$>>>$outpickle.close(){\textcolor{brown}{\# Closes the outpickle. You have to use this command at the end to close the protocol.}}\\
+
+{\textcolor{brown}{\# To Load a Pickle File}}\\
+
+$>>>$picklein = open(filename,'rb'){\textcolor{brown}{\# Opens the pickled file in reading mode (rb stands for readig binary and good for numeric data)}}\\
+
+$>>>$mydict = pickle.load(picklein){\textcolor{brown}{\# Loads and decodes the pickle file into whatever it was.}}\\
+
+$>>>$picklein.close(){\textcolor{brown}{\# To close the opened file.}}\\
+
+Note that, if you want to compress the file alongside saving that, all you need to do is to import a library called "bz2" standing for Bzip2 and do as follows:\\\\
+\textbf{Example:\\}
+
+{\textcolor{brown}{\# To Save the Pickle for Compressed File}}\\
+
+$>>>$import bz2{\textcolor{brown}{\# Imports the library}}\\
+
+$>>>$zipped = bz2.BZ2File(filename , 'w'){\textcolor{brown}{\# Opens a zip protocoled file.}}\\
+
+$>>>$pickle.dump(mydict,zipped){\textcolor{brown}{\# Pickles mydict dictionary into the compressed file.}}\\
+
+$>>>$zipped.close(){\textcolor{brown}{\# Closes the file.}}\\
+
+{\textcolor{brown}{\# To Load the Pickle for Compressed File}}\\
+
+$>>>$zipped = bz2.BZ2File(filename , 'rb'){\textcolor{brown}{\# Opens the zipped file.}}\\
+
+$>>>$mydict=pickle.load(zipped){\textcolor{brown}{\# Loads and decodes the pickle file into whatever it was.}}\\
+
+$>>>$zipped.close(){\textcolor{brown}{\# Closes the file.}}\\
+%..............................................................................................................
+
+\newpage
+
+%..............................................................................................................
+% Pathlib Library
+\section{\colorbox {Abi}{\color{white}{{\textbf {\Large Pathlib Library}}}}}
+\subsection{\colorbox {matgreen}{\color{white}{\large Pathlib}}}
+\textbf{from pathlib import Path $\Rightarrow$}Very handy in data controling\\\\
+
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Home \& CWD}}}
+\textbf{Path.cwd() \& Path.home() $\Rightarrow$} These two will print current working directory and home directory respectively.\\\\
+\textbf{Example:\\}
+
+$>>>$print(f"cwd is \{Path.cwd()\}\\
+
+\hspace{14pt} cwd is C:$\backslash\backslash$Users$\backslash\backslash$Mahdi
+
+$>>>$print(f"cwd is \{Path.home()\}{\textcolor{brown}{\# Prints home path.}}\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Testing that if this is a real address}}}
+\textbf{path.is\_dir() $\Rightarrow$} Does the job. Pay attention to the example:\\\\
+\textbf{Example:\\}
+
+$>>>$px = Path()\\
+
+$>>>$px = px / 'GUBOLI'\\{\textcolor{brown}{\# There is no folder GUBOLI. But px will have the address.}}\\
+
+$>>>$px\\{\textcolor{brown}{\# To obserce px}}\\
+
+\hspace{14pt} WindowsPath('GUBOLI')\\
+
+$>>>$px.is\_dir()\\{\textcolor{brown}{\# Shows that it's not a real address.}}\\
+
+\hspace{14pt} False\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Joining paths, getting all subfolders and return back to parent folder}}}Code below does it:\\\\
+\textbf{Example:\\}
+
+$>>>$path = Path()\\{\textcolor{brown}{\# path becomes current working directory}}\\
+
+$>>>$path = Path('E:/subfolder/subsubfolder')\\{\textcolor{brown}{\# path becomes the required directory. But, in order to change CWD, you must use os library and nothing else.}}\\
+
+$>>>$directory = [x for x in path.iterdir() if x.is\_dir()]\\{\textcolor{brown}{\# All the subfolders inside the current working direcotry, if they are real addresses will be joined to directory list.}}\\
+
+$>>>$file = [x for x in path.iterdir() if x.is\_file()]\\{\textcolor{brown}{\#All the files inside the current working direcotry, if they are files not folders.}}\\
+
+$>>>$path = path / 'newfolder'\\{\textcolor{brown}{\# Now, our path is in the newfolder. Like we opened newfolder in windows. If you run that path.iterdir() code, you will get the things inside the newfolder.}}\\
+
+$>>>$path = path.parent\\{\textcolor{brown}{\# Returns to the parent folder}}\\
+
+$>>>$path = path.parent.parent.parent\\{\textcolor{brown}{\# You can use whatever number of .parents you like to get back and further back}}\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Making a new directory (New folder)}}}
+\textbf{path.mkdir() $\Rightarrow$} Makes it. Look at the example:\\\\
+\textbf{Example:\\}
+
+$>>>$mypath = Path()\\
+
+$>>>$mypath = mypath / 'Mynewfolder'{\textcolor{brown}{\# This folder doesn't exist yet!}}\\
+
+$>>>$mypath.mkdir(){\textcolor{brown}{\# The folder will be created in the path.}}\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Copying files}}}
+Done by importing shutil library. Straight to examples:\\\\
+\textbf{Example:\\}
+
+$>>>$from shutil import copyfile\\
+
+$>>>$path = Path()\\
+
+$>>>$path = path / 'Mahdi' / 'Desktop'\\
+
+$>>>$Source = path / '1.mp4'{\textcolor{brown}{\# Selects an mp4 file as source file}}\\
+
+$>>>$Destination = path / '2.mp4'{\textcolor{brown}{\# Selects the destination}}\\
+
+$>>>$copyfile(Source,Destination){\textcolor{brown}{\# Copy is done :)}}\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Creating an empty file}}}
+We can create empty files. MP3, MP4, txt and whatever format you pass to your path. Imagine path is in the Desktop folder.
+\textbf{Example:\\}
+
+Just go to your desired path and make sure your CWD is the path you like by Path.cwd() command. I must recall that you can go to the desired path and select it as your CWD by os library like os.chdir(MyDesiredAddress). And if you type Path.cwd(), you will be in there.\\
+
+{\textcolor{brown}{\# You are in the place.}}\\
+
+$>>>$Path('myfile.txt').touch(){\textcolor{brown}{\# Creates the file for you in your place.}}\\
+
+{\textcolor{brown}{\# You are not in the place, act like below}}\\
+
+$>>>$address = os.getcwd(){\textcolor{brown}{\# saves CWD in address}}\\
+
+$>>>$newaddress = os.path.joint(address,'Desktop'){\textcolor{brown}{\# If address was $C:\backslash\backslash Users\backslash\backslash UserName$ , you can add Desktop to it as well.}}\\
+
+$>>>$os.chdir(newaddress){\textcolor{brown}{\# Now CWD is on Desktop}}\\
+
+$>>>$Path('myfile.txt').touch(){\textcolor{brown}{\# Creates the file for you in your Desktop.}}\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Rename a file}}}
+Imagine you are in the directory the file exists.\\\\
+\textbf{Example:\\}
+
+$>>>$path = Path('file1.txt'){\textcolor{brown}{\# Selects file1}}\\
+
+$>>>$path.rename('file100.txt'){\textcolor{brown}{\# Renames it to file100}}\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Remove a file or folder}}}
+Imagine you are in the directory the file exists.\\\\
+\textbf{Example:\\}
+
+$>>>$path = Path('file1.txt'){\textcolor{brown}{\# Selects file1}}\\
+
+$>>>$path.unlink(){\textcolor{brown}{\# Removes the file}}\\
+
+$>>>$path = Path('Foler'){\textcolor{brown}{\# Selects Folder}}\\
+
+$>>>$path.rmdir(){\textcolor{brown}{\# Removes the Folder}}\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Prints paths cleaner}}}
+Use path.as\_posix()\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large path parts}}}
+Can see the root, drive and parts of the path\\\\
+\textbf{Example:\\}
+
+$>>>$path = Path.cwd()\\
+
+$>>>$path.parts{\textcolor{brown}{\# Shows the path parts}}\\
+
+\hspace{14pt} $('C:\backslash\backslash', 'Users', 'Mahdi', 'Desktop')$\\
+
+$>>>$path.drive{\textcolor{brown}{\# The drive in which the path is}}\\
+
+\hspace{14pt} 'C:'\\
+
+$>>>$path.root{\textcolor{brown}{\# It's most used in Linux systems but, for windows it only shows a simple thing:}}\\
+
+\hspace{14pt} $'\backslash\backslash'$\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Globbing and finding specific types of files}}}
+Glob patterns specify sets of filenames with wildcard characters. For example, the *.txt represents all files with names ending in .txt. The * is a wildcard standing for any string of characters. Read comments because they provide you with important materials.\\\\
+\textbf{Example:\\}
+
+$>>>$for e in path.rglob('*.py'):\\
+$>>>$\hspace*{28pt}print(e)\\
+
+{\textcolor{brown}{\# Prints all the python files in the CWD \textbf{AND} in the subfolders of the CWD.}}\\
+
+$>>>$path.rglob('*.py') == path.glob('**/*.py'){\textcolor{brown}{\# The two commands are equivalent.}}\\
+
+$>>>$for e in path.glob('*.py'):\\
+$>>>$\hspace*{28pt}print(e)\\
+
+{\textcolor{brown}{\# Prints all the python files only in the CWD and not in subfolders.}}\\
+
+$>>>$for e in path.glob('image\_*'):\\
+$>>>$\hspace*{28pt}print(e)\\
+
+{\textcolor{brown}{\# Prints all the files that their name starts with image\_. Good for dataset loading in machine learning!!}}\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Counting files by extension }}}
+Very Interesting:\\\\
+\textbf{Example:\\}
+
+$>>>$import collections{\textcolor{brown}{\# Imports the library collections. We can use it to count for us.}}\\
+
+$>>>$files = [x.suffix for x in docs.iterdir() if path.is\_file() and x.suffix]{\textcolor{brown}{\# If (and x.suffix) is not placed in code, the files that have the extension will be selected. But now, the extension alone are selected.}}\\
+
+$>>>$data = collections.Counter(files)\\
+
+$>>>$print(data){\textcolor{brown}{\# See the result yourself :) .}}\\
+
+{\textcolor{brown}{\# If you want to only have the counts and not to have Counter(\{ at the begining, do as follows:}}\\
+
+$>>>$for key, val in data.items():\\
+$>>>$\hspace*{28pt}print(f'\{key\}: \{val\}')\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Read \& Write a text file}}}
+As below:\\\\
+\textbf{Example:\\}
+
+{\textcolor{brown}{\# To read a text file :}}\\
+
+
+
+$>>>$path = Path('1.txt'){\textcolor{brown}{\# Selects 1.txt file in CWD.}}\\
+
+$>>>$content = path.read\_text(){\textcolor{brown}{\# Reads the whole text}}\\
+
+$>>>$print(content){\textcolor{brown}{\# The text will be shown :)}}\\
+
+{\textcolor{brown}{\# To write a text file :}}\\
+
+$>>>$path = Path('2.txt'){\textcolor{brown}{\# Selects 2.txt file which is not in CWD and not created yet.}}\\
+
+$>>>$path.touch(){\textcolor{brown}{\# Creates the file.}}\\
+
+$>>>$path.write\_text('Hello Friends'){\textcolor{brown}{\# It's done!}}\\
+
+
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large To Loop over files in a directory}}}
+Do as below:\\\\
+\textbf{Example:\\}
+
+
+$>>>$pathlist = Path(directory\_in\_str).glob('**/*.asm')\\{\textcolor{brown}{\# Lists whatever .asm file is in the directory (directory\_in\_str is means you have to insert directory as a string).}}\\
+
+$>>>$for path in pathlist:\\
+
+$>>>$\hspace*{28pt}path\_in\_str = str(path)\\{\textcolor{brown}{\# Since path is not string and is the file itself.}}\\
+
+$>>>$\hspace*{28pt}print(path\_in\_str)\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Acknowledgements about pathlib tutorial}}}
+For further reading about pathlib, go to  : http://zetcode.com/python/pathlib/\\
+It really gave useful information. Thanks zetcode.\\\\
+
+%..............................................................................................................
+
+\newpage
+
+%..............................................................................................................
+% Tensorflow
+\section{\colorbox {Abi}{\color{white}{{\textbf {\Large Tensorflow}}}}}
+
+There's a quick telling, and that's that the Tensorflow.org/overview tutorials are absolutely great and perfect. \textbf{The secret to read documentations fast is} to actually \textbf{Read once to the end and try to get them line by line, and if you didn't understand a thing, just look at it's title, to see if it's related to data loading or model building or what... And then pass it quickly, just remember the headline... Once you were done with the documentation, google that part you didn't understand.}\\\\
+
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Importing Libraries}}}
+Below are a few libraries to import\\\\
+\textbf{Example:\\}
+
+$>>>$import tensorflow as tf\\{\textcolor{brown}{\# Main one}}\\
+
+$>>>$from tensorflow import keras\\{\textcolor{brown}{\# Keras library}}\\
+
+$>>>$from tensorflow.keras import layers\\{\textcolor{brown}{\# Importing Layers for easier handlings}}\\
+
+$>>>$import tensorflow\_datasets as tfds\\{\textcolor{brown}{\# Importing tfds useful library}}\\
+
+$>>>$import tensorflow\_docs as tfdocs\\{\textcolor{brown}{\# Documentation Library}}\\
+
+$>>>$import tensorflow\_docs.plots as plotting\\{\textcolor{brown}{\# tf plotter}}\\
+
+$>>>$from tensorflow.keras import regularizers\\{\textcolor{brown}{\# Imports regularizers for avoiding overfitting}}\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large General Commands}}}
+A list of general commands:\\\\
+\textbf{Example:\\}
+
+$>>>$a = tf.Variable([[2,3,4],[1,6,7]])\\{\textcolor{brown}{\# Builds a tensorflow variable.}}\\
+
+$>>>$a.shape\\{\textcolor{brown}{\# Gives its shape}}\\
+
+$>>>$tf.rank(a)\\{\textcolor{brown}{\# Gives the rank (somehow depth of it) of the tensor.}}\\
+
+$>>>$b = tf.reshape(a , [-1,2])\\{\textcolor{brown}{\# We specify the important dimension for us and we leave the other one as -1 for tensorflow to calculate what should be placed in there... E.g : A tensor is 6*8 dimensioned so it has got 48 elements. We want a tensor with 2 columns only, we write tf.reshape(tensor , [-1,2]) , so automatically -1 would be 48/2 = 24}}\\
+
+$>>>$tf.ones([shape])\\{\textcolor{brown}{\# Creates a tensor full of ones with the shape.}}\\
+
+$>>>$tf.zeros([shape])\\{\textcolor{brown}{\# Creates a tensor full of zeros with the shape.}}\\
+
+$>>>$randomer = tf.random.normal((size1,size2) , mean=0 , stddev = 1)\\{\textcolor{brown}{\# For random operations. There are different random distributions like normal and uniform}}\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Tensorflow Datasets}}}
+There are various techniques for dataset handelings. We'll go through each one.\\\\
+\textbf{Example:\\}
+
+With these commands, you will be able to create a data object from your data.\\
+
+$>>>$tmp = tf.data.Dataset.from\_tensors(tensor)\\{\textcolor{brown}{\# The tensor would be saved as a single element of tf.data object. We use these objects to train model later.}}\\
+
+$>>>$tmp = tf.data.Dataset.from\_tensor\_slices(tensor)\\{\textcolor{brown}{\# The tensor's elements would be saved as data objects. The previous command would take the whole tensor as one object but this command will take the elements of the tensor as objects}}\\
+
+By this below command, you will be able to see the data in data object (in 'tmp'):\\
+
+$>>>$for i in tmp:\\
+
+$>>>$\hspace*{14pt}print( i.numpy() )\\{\textcolor{brown}{\# Prints the data.}}\\
+
+You can see the data with this below command as well:\\
+
+$>>>$it = iter(tmp)\\{\textcolor{brown}{\# Makes a Python iterable}}\\
+
+$>>>$print(next(it).numpy())\\{\textcolor{brown}{\# Tada...}}\\
+
+I have to mention that if you made a data object from a dictionary, you have to use below command:\\
+
+$>>>$for i in tmp:\\
+
+$>>>$\hspace*{14pt}print( list(i.values())[0].numpy())\\{\textcolor{brown}{\# Prints the data's first key's elements.}}\\
+
+You can inspect the data object type and shape by:\\
+
+$>>>$tmp.element\_spec\\
+
+You can combine a few data objects with eachother:\\
+
+$>>>$com = tf.data.Dataset.zip( (dataset1,dataset2,dataset3,....) )\\
+
+Now, the most useful methods for this tf.data.Dataset class:\\
+\hspace*{10pt}$\bullet$ The .repeat(\#n) method that will repeat the dataset for n times.\\
+
+$>>>$ counter = 0\\
+
+$>>>$for i in tmp.repeat(2):\\
+
+$>>>$\hspace*{14pt}print(i.numpy())\\
+
+$>>>$counter += 1\\
+
+$>>>$ print(counter)\\
+
+\hspace*{10pt}$\bullet$ The .shuffle(\#n) method that will shuffle the data for n times.
+
+$>>>$for i in tmp.shuffle(2):\\
+
+$>>>$\hspace*{14pt}print(i.numpy())\\
+
+\hspace*{10pt}$\bullet$ The .batch(\#n) method that will batch the data in n-element batches.\\ If we had a dataset in which its elements were with different lengths, we should use .padded\_batch(batch\_size , padded\_shapes([size1,size2])) where batch\_size is batch size, and padded\_shapes, is a way to make all the data elements to have unique length specified by size1,size2 where size1 or size2 could be set to None if each is not important.\\
+
+$>>>$for i in tmp.batch(5):\\
+
+$>>>$\hspace*{14pt}print(i.numpy())\\
+
+\hspace*{10pt}$\bullet$ The .take(\#n) method that will select the n first elements of the tmp.\\
+
+$>>>$for i in tmp.take(3):\\
+
+$>>>$\hspace*{14pt}print(i.numpy())\\{\textcolor{brown}{\# It will show the first 3 elements of the data}}\\
+
+You can do a mixture of operations in one line:\\
+
+$>>>$counter = 0\\
+
+$>>>$for i in tmp.repeat(3).shuffle(4).batch(5).take(10):\\
+
+$>>>$\hspace*{14pt}counter += 1\\
+
+$>>>$\hspace*{14pt}print(counter , '$\backslash$n' , i.numpy() , '$\backslash$n')\\
+
+{\textcolor{brown}{\# This will first, repeat the dataset for 3 times, then shuffle all of it, then turn it to batches of 5 elements, then takes the first 10 and represents it.}}\\
+
+You can build data object from Python Generators as well:\\
+
+{\textcolor{brown}{\# This is the generator:}}\\
+
+$>>>$def count(stop):\\
+
+$>>>$\hspace*{14pt}i = 0\\
+
+$>>>$\hspace*{14pt}while i<stop:\\
+
+$>>>$\hspace*{28pt}yield i\\
+
+$>>>$\hspace*{28pt}i += 1\\
+
+$>>>$ds\_counter = tf.data.Dataset.from\_generator(count, args=[10], output\_types=tf.int32, output\_shapes = (), )\\
+
+{\textcolor{brown}{\# This is the data object created from the generator. It's arguments are first, the generator itself (count is my generator now...); Second, is the number of 'next's to go (in my case, 10 means to run the generator for 10 times, which would be from 0 to 9). Then the output type and shape.}}\\
+
+You can list the files in the folder by this command:\\
+
+$>>>$list\_ds = tf.data.Dataset.list\_files(str(data\_dir/'*'))\\{\textcolor{brown}{\# Makes a tensorflow list out of files.}}\\
+
+$>>>$for f in list\_ds.take(5):\\
+
+$>>>$\hspace*{14pt}print(f.numpy()){\textcolor{brown}{\# Shows the first 5 of them}}\\
+
+A very handy tool for opening CSV files (after pandas of course) is as below:\\
+
+$>>>$titan = tf.data.experimental.make\_csv\_dataset('titanic.csv' , batch\_size = 5  , label\_name = 'Survived' , select\_columns = ['Pclass' , 'Sex' , 'Age' , 'Frare'])\\{\textcolor{brown}{\# I think everything is clear...}}\\
+
+\textbf{This part is for images... Verrry handy}\\
+
+Read the documentations on the web for more info...\\
+
+$>>>$x = tf.keras.preprocessing.image.ImageDataGenerator( IMAGE PROCESSING OPERATIONS ){\textcolor{brown}{\# Stores the settings related to the image processing things for you.}}\\
+
+$>>>$gen = x.flow\_from\_directory(batch\_size = batch\_size , directory = mydatadir , shuffle = True , target\_size = (img\_height , img\_width) , class\_mode = 'binary')\\
+
+class\_mode is for labeling. Can be set to 'sparse' (int) , 'binary' (1D) , 'categorical' (2D). Categorical is for multi-classification, binary for two-classification and sparse,... I don't know much about it.. Google it :)\\
+
+This .flow\_from can be from directory or DataFrame. in each case, pass the required information.\\
+
+After creating your own model, you can use:\\
+
+$>>>$history = model.fit\_generator(gen\_data , steps\_per\_epoch = ,epochs = , validation\_data = valid\_gen\_data, validation\_steps = )\\ 
+
+Parameters are clear mostly. gen\_data is the train set turned into generator by ImageDataGenerator of tensorflow. validation\_data is the same story for validation set. Other pararmeters are obvious... epochs and steps in each epoch.\\
+
+You can use plotting options to visualize your data as well:\\
+
+$>>>$acc = history.history['accuracy']\\
+
+$>>>$val\_acc = history.history['val\_accuracy']\\
+
+$>>>$loss=history.history['loss']\\
+
+$>>>$val\_loss=history.history['val\_loss']\\
+
+$>>>$epochs\_range = range(epochs)\\
+
+$>>>$plt.figure(figsize=(8, 8))\\
+$>>>$plt.subplot(1, 2, 1)\\
+$>>>$plt.plot(epochs\_range, acc, label='Training Accuracy')\\
+$>>>$plt.plot(epochs\_range, val\_acc, label='Validation Accuracy')\\
+$>>>$plt.legend(loc='lower right')\\
+$>>>$plt.title('Training and Validation Accuracy')\\
+
+$>>>$plt.subplot(1, 2, 2)\\
+$>>>$plt.plot(epochs\_range, loss, label='Training Loss')\\
+$>>>$plt.plot(epochs\_range, val\_loss, label='Validation Loss')\\
+$>>>$plt.legend(loc='upper right')\\
+$>>>$plt.title('Training and Validation Loss')\\
+$>>>$plt.show()\\\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Keras Library}}}
+\subsubsection{\colorbox {important}{\color{white}{\large Keras Datasets}}}
+Keras has a couple of datasets up in the cloud and it's possible for you to download and work on them. For getting them, use below commands:\\\\
+\textbf{Example:\\}
+
+$>>>$(xtrain , ytrain) , (xtest , ytest) = keras.datasets.mnist.load\_data()\\{\textcolor{brown}{\# Loads the train and test sets.}}\\
+
+%..............................................................................................................
+
+\subsubsection{\colorbox {important}{\color{white}{\large Keras URLS}}}
+It's possible to download a dataset from a URL:\\\\
+\textbf{Example:\\}
+
+$>>>$DATA = keras.utils.get\_file('name' , 'URL address')\\{\textcolor{brown}{\# Downloads the data file.}}\\
+
+%..............................................................................................................
+
+\subsubsection{\colorbox {important}{\color{white}{\large Keras Model}}}
+The \href{https://www.tensorflow.org/guide/keras/overview}{Tensorflow Tutorial Page} has a strong tutorial on tf.keras... Very Complete; We, would only highlight what is where on this webpage.\\
+
+$\bullet$ On the left-side, there is a pane. From Tensorflow 2 part, the only handy one is Effective Tensorflow that introduces some how some techniques for transfer learning with 'head' and 'trunk' things... Take a look if it's good for you.\\
+
+The Keras part compeletely is the most useful thing on earth.... :)\\
+It contains :\\
+
+$\bullet$ Keras Review: tf.keras.Sequential structure, keras optimizers, loss functions, suitable modes for classification and regression, saving, almost everything...\\
+
+Enough is enough... :)\\
+
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Importing Libraries}}}
+Below are a few libraries to import\\\\
+\textbf{Example:\\}
+
+$>>>$Python code\\{\textcolor{brown}{\# Comment}}\\
+
+\hspace*{14pt} result\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Importing Libraries}}}
+Below are a few libraries to import\\\\
+\textbf{Example:\\}
+
+$>>>$Python code\\{\textcolor{brown}{\# Comment}}\\
+
+\hspace*{14pt} result\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Importing Libraries}}}
+Below are a few libraries to import\\\\
+\textbf{Example:\\}
+
+$>>>$Python code\\{\textcolor{brown}{\# Comment}}\\
+
+\hspace*{14pt} result\\
+
+%..............................................................................................................
+
+\newpage
+
+%..............................................................................................................
+% Pytorch
+\section{\colorbox {Abi}{\color{white}{{\textbf {\Large The End}}}}}
+\subsection{\colorbox {matgreen}{\color{white}{\large Importing Libraries}}}
+Below are a few libraries to import\\\\
+\textbf{Example:\\}
+
+$>>>$Python code\\{\textcolor{brown}{\# Comment}}\\
+
+\hspace*{14pt} result\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Importing Libraries}}}
+Below are a few libraries to import\\\\
+\textbf{Example:\\}
+
+$>>>$Python code\\{\textcolor{brown}{\# Comment}}\\
+
+\hspace*{14pt} result\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Importing Libraries}}}
+Below are a few libraries to import\\\\
+\textbf{Example:\\}
+
+$>>>$Python code\\{\textcolor{brown}{\# Comment}}\\
+
+\hspace*{14pt} result\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Importing Libraries}}}
+Below are a few libraries to import\\\\
+\textbf{Example:\\}
+
+$>>>$Python code\\{\textcolor{brown}{\# Comment}}\\
+
+\hspace*{14pt} result\\
+
+%..............................................................................................................
+
+\subsection{\colorbox {matgreen}{\color{white}{\large Importing Libraries}}}
+Below are a few libraries to import\\\\
+\textbf{Example:\\}
+
+$>>>$Python code\\{\textcolor{brown}{\# Comment}}\\
+
+\hspace*{14pt} result\\
+
+%..............................................................................................................
+
+%..............................................................................................................
+% The End
+\section{\colorbox {Abi}{\color{white}{{\textbf {\Large The End}}}}}
+\subsection{\colorbox {matgreen}{\color{white}{\large Acknowledgements}}}
+Dear readers. Thank you for reading this article. I will not continue this documentation and the rest of the things, related to each library we discussed, will be upon yourselves.\\
+
+I wanted to gather a meaningful and handy pack to show you some basics and little bit of everything from most useful libraries in python. Although most of them are not listed like Tensorflow, Pytorch, etc. But, these would cover a good range of python materials.\\
+%..............................................................................................................
+\subsection{\colorbox {matgreen}{\color{white}{\large Final Words}}}
+To sum it up, I should encourage you all to get used to read documentations. There are a lot of persons out there gathering too much informations in details to provide you with. This is one of the main reasons I decided to finish this article. It's too much time consuming to work like this. Just get used to work with documentations and grasp the ones that fits you.\\\\
+
+{\textsl{With Best Regards\\
+Mahdi Dor Emami}}
+
+\end{document}
+
+
+%..............................................................................................................
+\begin{comment}
+
+Sample code for writing section, subsection, and...
+
+%..............................................................................................................
+% The End
+\section{\colorbox {Abi}{\color{white}{{\textbf {\Large The End}}}}}
+\subsection{\colorbox {matgreen}{\color{white}{\large the code}}}
+\textbf{x=code $\Rightarrow$} explanations\\\\
+\textbf{Example:\\}
+$>>>$Python code\\{\textcolor{brown}{\# Comment}}\\
+\hspace*{14pt} result\\
+\end{comment}
