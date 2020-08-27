@@ -122,15 +122,6 @@
 \contentsline {subsubsection}{\numberline {15.4.1}\color@box {}{important}{\color {white}{\relax \fontsize {12}{14}\selectfont Keras Datasets}}}{39}{subsubsection.15.4.1}
 \contentsline {subsubsection}{\numberline {15.4.2}\color@box {}{important}{\color {white}{\relax \fontsize {12}{14}\selectfont Keras URLS}}}{39}{subsubsection.15.4.2}
 \contentsline {subsubsection}{\numberline {15.4.3}\color@box {}{important}{\color {white}{\relax \fontsize {12}{14}\selectfont Keras Model}}}{39}{subsubsection.15.4.3}
-\contentsline {subsection}{\numberline {15.5}\color@box {}{matgreen}{\color {white}{\relax \fontsize {12}{14}\selectfont Importing Libraries}}}{40}{subsection.15.5}
-\contentsline {subsection}{\numberline {15.6}\color@box {}{matgreen}{\color {white}{\relax \fontsize {12}{14}\selectfont Importing Libraries}}}{40}{subsection.15.6}
-\contentsline {subsection}{\numberline {15.7}\color@box {}{matgreen}{\color {white}{\relax \fontsize {12}{14}\selectfont Importing Libraries}}}{40}{subsection.15.7}
 \contentsline {section}{\numberline {16}\color@box {}{Abi}{\color {white}{{\textbf {\relax \fontsize {14.4}{18}\selectfont The End}}}}}{41}{section.16}
-\contentsline {subsection}{\numberline {16.1}\color@box {}{matgreen}{\color {white}{\relax \fontsize {12}{14}\selectfont Importing Libraries}}}{41}{subsection.16.1}
-\contentsline {subsection}{\numberline {16.2}\color@box {}{matgreen}{\color {white}{\relax \fontsize {12}{14}\selectfont Importing Libraries}}}{41}{subsection.16.2}
-\contentsline {subsection}{\numberline {16.3}\color@box {}{matgreen}{\color {white}{\relax \fontsize {12}{14}\selectfont Importing Libraries}}}{41}{subsection.16.3}
-\contentsline {subsection}{\numberline {16.4}\color@box {}{matgreen}{\color {white}{\relax \fontsize {12}{14}\selectfont Importing Libraries}}}{41}{subsection.16.4}
-\contentsline {subsection}{\numberline {16.5}\color@box {}{matgreen}{\color {white}{\relax \fontsize {12}{14}\selectfont Importing Libraries}}}{41}{subsection.16.5}
-\contentsline {section}{\numberline {17}\color@box {}{Abi}{\color {white}{{\textbf {\relax \fontsize {14.4}{18}\selectfont The End}}}}}{42}{section.17}
-\contentsline {subsection}{\numberline {17.1}\color@box {}{matgreen}{\color {white}{\relax \fontsize {12}{14}\selectfont Acknowledgements}}}{42}{subsection.17.1}
-\contentsline {subsection}{\numberline {17.2}\color@box {}{matgreen}{\color {white}{\relax \fontsize {12}{14}\selectfont Final Words}}}{42}{subsection.17.2}
+\contentsline {subsection}{\numberline {16.1}\color@box {}{matgreen}{\color {white}{\relax \fontsize {12}{14}\selectfont Acknowledgements}}}{41}{subsection.16.1}
+\contentsline {subsection}{\numberline {16.2}\color@box {}{matgreen}{\color {white}{\relax \fontsize {12}{14}\selectfont Final Words}}}{41}{subsection.16.2}
